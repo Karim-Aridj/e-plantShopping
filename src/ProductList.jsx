@@ -3,7 +3,15 @@ import './ProductList.css'
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../src/CartSlice.jsx';
+
+
 function ProductList({ onHomeClick }) {
+    const dispatch = useDispatch();
+    const CartItems = useSelector((state) => state.cart.items);
+
+const calculateTotalQuantity = () => { 
+    return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0; 
+};
     const [addedToCart, setAddedToCart] = useState({});
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
